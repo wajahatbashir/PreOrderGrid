@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">wb_preordergrid_order_listing.wb_preordergrid_order_listing_data_source</item>
+            <item name="deps" xsi:type="string">wb_preordergrid_order_listing.wb_preordergrid_order_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">#</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="wb_preordergrid_order_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">wb_preordergrid_order_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="collection" xsi:type="object">WB\PreOrderGrid\Model\ResourceModel\Order\Collection</argument>
+        </argument>
+        <dataProvider name="wb_preordergrid_order_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <columns name="columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="increment_id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Order</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <filter>dateRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Purchased</label>
+            </settings>
+        </column>
+        <column name="status" class="WB\PreOrderGrid\Ui\Component\Listing\Column\Status">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="delivery_date" class="WB\PreOrderGrid\Ui\Component\Listing\Column\DeliveryDate">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Delivery Date</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Magento\Ui\Component\Listing\Columns\Column">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                    <item name="links" xsi:type="array">
+                        <item name="edit" xsi:type="array">
+                            <item name="href" xsi:type="url" path="sales/order/view/id/$entity_id"/>
+                            <item name="label" xsi:type="string" translate="true">View</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <listingToolbar name="listing_bottom">
+        <paging name="listing_paging"/>
+    </listingToolbar>
+</listing>
